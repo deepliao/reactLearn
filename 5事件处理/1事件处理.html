@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+</head>
+<body>
+    <div id="test"></div>
+    <script  type="text/babel">
+    class Demo extends React.Component{
+        //最新版写法
+        myRef = React.createRef()//调用后可以返回一个容器 该容器可以存储被ref多所标识的节点
+        //该容器专人专用
+        showData=()=>{
+            alert(this.myRef.current.value)
+        }
+        showData2=(event)=>{
+            alert(event.target.value)
+            //event.target找到事件源
+            //发生事件的事件源整好是操纵的话可以省略
+        }
+        render(){
+            return (
+                <div>
+                    <input ref={this.myRef} type="text" placeholder='点击按钮提示数据'/>&nbsp;
+                    <button  onClick={this.showData}>点我提示左侧的数据</button>&nbsp;
+                    <input  onBlur={this.showData2} type="text" placeholder='失去焦点提示数据'/>      
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<Demo/>,document.getElementById('test'))
+    </script>
+</body>
+</html>
