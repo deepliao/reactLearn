@@ -13,15 +13,32 @@
     <div id="test"></div>
     <script  type="text/babel">
     class Life extends React.Component{
+        state={opacity:1}
+        death=()=>{
+            //卸载组件
+            ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+        }
+        //life的实例对象调用
+        componentDidMount(){
+            setInterval(() => {
+                let {opacity} = this.state
+                opacity -= 0.1
+                if (opacity <= 0) {
+                    opacity=1
+                }
+                this.setState({opacity})
+            }, 1000);
+        }
         render(){
             return (
                 <div>
-                    <h2>学不完了怎么办</h2>
-                    <button>接着学</button>
+                    <h2 style={{opacity: this.stste.opacity}}>学不完了怎么办</h2>
+                    <button onClick={this.death}>接着学</button>
                 </div>
             )
         }
     }
+    ReactDOM.render(<Life/>,document.getElementById('test'))
     </script>
 </body>
 </html>
